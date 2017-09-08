@@ -1,6 +1,15 @@
 language: python
 
-python: 2.7
+dist: trusty
+
+sudo: true
+
+python:
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.6"
 
 env:
   - TOXENV=py27-django18
@@ -21,7 +30,7 @@ env:
   - TOXENV=py36-django_trunk
 
 install:
-  - pip install --upgrade pip setuptools tox virtualenv coveralls
+  - pip install --upgrade pip setuptools tox tox-travis virtualenv coveralls
 
 script:
   - tox
@@ -29,7 +38,6 @@ script:
 matrix:
   allow_failures:
     - env: TOXENV=py35-django_trunk
-    - env: TOXENV=py36-django111
     - env: TOXENV=py36-django_trunk
 
 after_success: coveralls
